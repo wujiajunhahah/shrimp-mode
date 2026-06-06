@@ -42,6 +42,7 @@ export function ScanPage({
 
   const [timeStr, setTimeStr] = useState('00:00');
   const [showModePicker, setShowModePicker] = useState(false);
+  const [confirmStop, setConfirmStop] = useState(false);
 
   // Enable pose detection
   const { processFrame } = usePoseDetection({
@@ -106,9 +107,20 @@ export function ScanPage({
           <button className="scan-complete-btn" onClick={onComplete} aria-label="Complete and generate card">
             🃏
           </button>
-          <button className="scan-stop-btn" onClick={onStop} aria-label="Stop camera">
-            ⏹
-          </button>
+          <div className="scan-stop-wrap">
+            <button className="scan-stop-btn" onClick={() => setConfirmStop(true)} aria-label="Stop camera">
+              ⏹
+            </button>
+            {confirmStop && (
+              <div className="scan-stop-confirm">
+                <span>{t ? '停止会丢失本次数据' : 'Stop discards this session?'}</span>
+                <div className="ssc-actions">
+                  <button onClick={onStop}>{t ? '停止' : 'Stop'}</button>
+                  <button onClick={() => setConfirmStop(false)}>{t ? '取消' : 'Cancel'}</button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 

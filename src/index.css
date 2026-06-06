@@ -212,6 +212,22 @@ html, body, #root {
   display: flex; align-items: center; justify-content: center; transition: all 0.2s;
 }
 .scan-stop-btn:hover { color: var(--accent-shrimp); border-color: var(--accent-shrimp); }
+.scan-stop-wrap { position: relative; }
+.scan-stop-confirm {
+  position: absolute; top: calc(100% + 6px); right: 0;
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm); padding: 10px 14px; white-space: nowrap;
+  z-index: 100; min-width: 180px;
+}
+.scan-stop-confirm span { font-size: 12px; color: var(--text-secondary); display: block; margin-bottom: 8px; }
+.ssc-actions { display: flex; gap: 8px; }
+.ssc-actions button {
+  flex: 1; background: var(--bg-card-hover); border: 1px solid var(--border-subtle);
+  border-radius: 6px; padding: 6px 12px; font-size: 12px; color: var(--text-primary);
+  cursor: pointer; transition: all 0.15s;
+}
+.ssc-actions button:first-child:hover { border-color: var(--accent-shrimp); color: var(--accent-shrimp); }
+.ssc-actions button:last-child:hover { border-color: var(--accent-human); color: var(--accent-human); }
 
 .mode-picker {
   display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 24px;
@@ -398,9 +414,36 @@ html, body, #root {
 }
 .completed-emoji { font-size: 56px; }
 .completed-card h2 { font-size: 22px; font-weight: 700; }
-.completed-card p { color: var(--text-secondary); font-size: 14px; }
-.completed-actions { display: flex; flex-direction: column; gap: 10px; width: 100%; margin-top: 8px; }
-.completed-actions .cta-button { justify-content: center; width: 100%; }
+.completed-card p { color: var(--text-secondary); font-size: 14px; margin-bottom: 24px; }
+
+/* Primary actions row */
+.completed-actions-primary {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  margin-bottom: 12px;
+}
+.completed-primary-btn {
+  background: var(--bg-card-hover); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md); padding: 16px 12px;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  cursor: pointer; transition: all 0.2s;
+}
+.completed-primary-btn:hover { border-color: var(--accent-shrimp); background: var(--bg-card); }
+.cpb-icon { font-size: 24px; }
+.cpb-label { font-size: 13px; color: var(--text-primary); font-weight: 600; }
+
+/* Secondary actions grid (2x2) */
+.completed-actions-secondary {
+  display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px;
+}
+.completed-icon-btn {
+  background: none; border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm); padding: 10px 6px;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  cursor: pointer; transition: all 0.2s; color: var(--text-secondary);
+  font-size: 11px;
+}
+.completed-icon-btn:hover { border-color: var(--accent-shrimp); color: var(--text-primary); }
+.completed-icon-btn span:first-child { font-size: 20px; }
 
 /* ═══════════════════════════════════════════
    SHARE CARD

@@ -23,31 +23,41 @@ export function CompletedPrompt({
       <div className="completed-card">
         <div className="completed-emoji">🦐</div>
         <h2>
-          {t ? '首次虾化扫描完成！' : 'Your first Shrimp Scan is complete!'}
+          {t ? '虾化扫描完成！' : 'Shrimp Scan complete!'}
         </h2>
         <p>
-          {t
-            ? '生成你的虾化卡片？或继续低频监控？'
-            : 'Generate your card? Continue low-frequency protection?'}
+          {t ? '选择下一步' : 'What would you like to do?'}
         </p>
-        <div className="completed-actions">
-          <button className="cta-button" onClick={onShare}>
-            {t ? '🃏 生成羞耻卡' : '🃏 Generate Shame Card'}
+
+        {/* Primary actions — prominent */}
+        <div className="completed-actions-primary">
+          <button className="completed-primary-btn" onClick={onShare}>
+            <span className="cpb-icon">🃏</span>
+            <span className="cpb-label">{t ? '生成羞耻卡' : 'Shame Card'}</span>
           </button>
-          <button className="cta-button" onClick={onReport}>
-            {t ? '📊 工位伤害报告' : '📊 Damage Report'}
+          <button className="completed-primary-btn" onClick={onReport}>
+            <span className="cpb-icon">📊</span>
+            <span className="cpb-label">{t ? '伤害报告' : 'Damage Report'}</span>
           </button>
-          <button className="cta-button secondary" onClick={onContinue}>
-            {t ? '🦐 继续审判我' : '🦐 Continue Judging Me'}
+        </div>
+
+        {/* Secondary actions — icon grid */}
+        <div className="completed-actions-secondary">
+          <button className="completed-icon-btn" onClick={onContinue} title={t ? '继续审判' : 'Continue'}>
+            <span>🦐</span>
+            <span>{t ? '继续' : 'Continue'}</span>
           </button>
-          <button className="cta-button secondary" onClick={onAskBody}>
-            {t ? '🧠 咨询我的身体' : '🧠 Ask My Body'}
+          <button className="completed-icon-btn" onClick={onAskBody} title={t ? '咨询身体' : 'Ask Body'}>
+            <span>🧠</span>
+            <span>{t ? '咨询' : 'Ask'}</span>
           </button>
-          <button className="cta-button secondary" onClick={onPhone}>
-            {t ? '📱 手机伴侣' : '📱 Phone Companion'}
+          <button className="completed-icon-btn" onClick={onPhone} title={t ? '手机伴侣' : 'Phone'}>
+            <span>📱</span>
+            <span>{t ? '手机' : 'Phone'}</span>
           </button>
-          <button className="cta-button secondary" onClick={onStop}>
-            {t ? '⏹ 停止摄像头' : '⏹ Stop Camera'}
+          <button className="completed-icon-btn" onClick={onStop} title={t ? '停止' : 'Stop'}>
+            <span>⏹</span>
+            <span>{t ? '停止' : 'Stop'}</span>
           </button>
         </div>
       </div>
