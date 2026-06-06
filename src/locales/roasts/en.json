@@ -1,0 +1,89 @@
+{
+  "0": {
+    "mild": ["Looking human. Enjoy it while it lasts."],
+    "savage": ["Human. For now. The desk is patient."],
+    "cursed": ["A rare sighting: a functioning spine in the wild."],
+    "supportive": ["Good posture! Keep that human baseline."],
+    "meeting_safe": ["Posture looks healthy."],
+    "share_card": ["I am still human. Barely."]
+  },
+  "1": {
+    "mild": ["Neck starting to lean. Easy fix."],
+    "savage": ["Your neck just sent a distress signal."],
+    "cursed": ["Baby shrimp detected. The metamorphosis has begun."],
+    "supportive": ["Small adjustment needed. You got this."],
+    "meeting_safe": ["Small posture drift detected."],
+    "share_card": ["Neck starting its slow surrender."]
+  },
+  "2": {
+    "mild": [
+      "Office shrimp confirmed. Time to unshrimp.",
+      "You are being marinated by desk culture."
+    ],
+    "savage": [
+      "Your spine just opened a resignation letter.",
+      "You are not working. You are being marinated."
+    ],
+    "cursed": [
+      "The office shrimp emerges. Fluorescent lights smile.",
+      "Your cubicle has accepted you as one of its own."
+    ],
+    "supportive": [
+      "Hey, notice that lean? Let us fix it together.",
+      "You have been sitting a while. Micro-break time?"
+    ],
+    "meeting_safe": ["Posture could use a small reset."],
+    "share_card": ["I have been marinated by desk culture."]
+  },
+  "3": {
+    "mild": [
+      "Deep shrimp territory. Your neck is filing a formal complaint.",
+      "Your upper body is entering the folding stage."
+    ],
+    "savage": [
+      "DEEP SHRIMP. Your neck is trying to leave your body.",
+      "You are 72% shrimp. The rest is denial.",
+      "Your posture is a cry for help in 60fps."
+    ],
+    "cursed": [
+      "The shrimp deepens. Your spine is writing poetry about escape.",
+      "Somewhere, a chiropractor just bought a yacht with your future money."
+    ],
+    "supportive": [
+      "Deep shrimp alert. This is your sign to move!",
+      "I see that curve. 30 seconds of neck reset?"
+    ],
+    "meeting_safe": ["Time for a quick posture check."],
+    "share_card": ["I was 72% shrimp today and all I got was this card."]
+  },
+  "4": {
+    "mild": ["Fossil shrimp. The desk owns your skeleton now."],
+    "savage": [
+      "FOSSIL SHRIMP. You are not sitting. The desk owns you.",
+      "Your body has been archived by IKEA.",
+      "The shrimp fossil record will remember this session."
+    ],
+    "cursed": [
+      "Fossil shrimp. Future archaeologists will find you bent at 87 degrees.",
+      "Your skeleton has given up. It now identifies as a desk accessory."
+    ],
+    "supportive": ["Okay, fossil shrimp is serious. Let us stand up together."],
+    "meeting_safe": ["Strong recommendation: posture break."],
+    "share_card": ["Today I achieved fossil shrimp status. Not proud."]
+  },
+  "5": {
+    "mild": ["Final shrimp. The ultimate form of knowledge work."],
+    "savage": [
+      "FINAL SHRIMP. The ultimate form of knowledge work has emerged.",
+      "Your posture is now abstract art.",
+      "Congratulations. You have become the shrimp."
+    ],
+    "cursed": [
+      "Final shrimp. The screen has consumed you. Only the shell remains.",
+      "Some say the final shrimp still sits there, folding into infinity."
+    ],
+    "supportive": ["Final shrimp! The good news: only one way from here. Up."],
+    "meeting_safe": ["Urgent: posture reset recommended."],
+    "share_card": ["Final form: shrimp. Legend says I am still folding."]
+  }
+}
