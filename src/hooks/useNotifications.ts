@@ -18,14 +18,14 @@ export async function sendNotification(title: string, body: string): Promise<voi
   if (registration) {
     registration.showNotification(title, {
       body,
-      icon: '/favicon.svg',
-      badge: '/favicon.svg',
+      icon: '/shrimp-mode/favicon.svg',
+      badge: '/shrimp-mode/favicon.svg',
       tag: 'shrimp-reminder',
       requireInteraction: false,
       silent: false,
     });
   } else {
-    new Notification(title, { body, icon: '/favicon.svg' });
+    new Notification(title, { body, icon: '/shrimp-mode/favicon.svg' });
   }
 }
 

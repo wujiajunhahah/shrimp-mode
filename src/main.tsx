@@ -5,7 +5,7 @@ import './index.css';
 
 // Register service worker for PWA
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js');
+  navigator.serviceWorker.register('/shrimp-mode/sw.js');
 }
 
 createRoot(document.getElementById('root')!).render(
