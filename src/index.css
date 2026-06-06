@@ -287,6 +287,19 @@ html, body, #root {
 }
 .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
 
+/* Scan actions (Complete / Stop) */
+.scan-actions-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 24px;
+}
+
+.scan-actions-row .cta-button,
+.scan-actions-row .cta-button.secondary {
+  width: 100%;
+}
+
 /* Bottom bar */
 .scan-bottombar {
   display: flex; justify-content: space-between; align-items: center;

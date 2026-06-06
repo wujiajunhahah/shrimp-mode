@@ -181,6 +181,16 @@ export function ScanPage({
         </div>
       </div>
 
+      {/* Actions */}
+      <div className="scan-actions-row">
+        <button className="cta-button" onClick={onComplete}>
+          {t ? '🎯 完成检测' : '🎯 Complete Scan'}
+        </button>
+        <button className="cta-button secondary" onClick={onStop}>
+          {t ? '⏹ 停止并返回' : '⏹ Stop & Go Back'}
+        </button>
+      </div>
+
       {/* Bottom bar */}
       <div className="scan-bottombar">
         <div className={`signal-quality-chip ${qualityLabel}`}>
