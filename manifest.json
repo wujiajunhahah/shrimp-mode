@@ -1,0 +1,16 @@
+{
+  "name": "Shrimp Mode",
+  "short_name": "ShrimpMode",
+  "description": "Your webcam detects when your desk job turns you into a shrimp.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d1117",
+  "theme_color": "#ff6b35",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
