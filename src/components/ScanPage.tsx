@@ -103,6 +103,9 @@ export function ScanPage({
               ? WORK_MODES.find((m) => m.value === workMode)?.zh
               : WORK_MODES.find((m) => m.value === workMode)?.en}
           </button>
+          <button className="scan-complete-btn" onClick={onComplete} aria-label="Complete and generate card">
+            🃏
+          </button>
           <button className="scan-stop-btn" onClick={onStop} aria-label="Stop camera">
             ⏹
           </button>
@@ -179,16 +182,6 @@ export function ScanPage({
             <span className="stat-label">{t ? '无视提醒' : 'Ignored'}</span>
           </div>
         </div>
-      </div>
-
-      {/* Actions */}
-      <div className="scan-actions-row">
-        <button className="cta-button" onClick={onComplete}>
-          {t ? '🎯 完成检测' : '🎯 Complete Scan'}
-        </button>
-        <button className="cta-button secondary" onClick={onStop}>
-          {t ? '⏹ 停止并返回' : '⏹ Stop & Go Back'}
-        </button>
       </div>
 
       {/* Bottom bar */}

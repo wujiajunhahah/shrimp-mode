@@ -197,6 +197,14 @@ html, body, #root {
   font-size: 13px; cursor: pointer; transition: all 0.2s;
 }
 .scan-mode-btn:hover { background: var(--bg-card-hover); }
+.scan-complete-btn {
+  background: none; border: 1px solid var(--border-subtle);
+  color: var(--text-secondary); width: 36px; height: 36px;
+  border-radius: var(--radius-sm); font-size: 16px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+}
+.scan-complete-btn:hover { color: var(--accent-human); border-color: var(--accent-human); }
+
 .scan-stop-btn {
   background: none; border: 1px solid var(--border-subtle);
   color: var(--text-secondary); width: 36px; height: 36px;
@@ -286,19 +294,6 @@ html, body, #root {
   color: var(--text-primary);
 }
 .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
-
-/* Scan actions (Complete / Stop) */
-.scan-actions-row {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 20px 24px;
-}
-
-.scan-actions-row .cta-button,
-.scan-actions-row .cta-button.secondary {
-  width: 100%;
-}
 
 /* Bottom bar */
 .scan-bottombar {
