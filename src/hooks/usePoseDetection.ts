@@ -14,28 +14,31 @@ let faceDetectorInstance: FaceDetector | null = null;
 let initPromise: Promise<void> | null = null;
 
 async function ensureModels(): Promise<void> {
-  if (poseLandmarkerInstance && faceDetectorInstance) return;
+  if (poseLandmarkerInstance) return; // Pose is enough to start
   if (!initPromise) {
     initPromise = (async () => {
       const vision = await FilesetResolver.forVisionTasks(
         'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.35/wasm'
       );
 
-      // Load both models in parallel
-      const [pose, face] = await Promise.all([
-        PoseLandmarker.createFromOptions(vision, {
-          baseOptions: {
-            modelAssetPath:
-              'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task',
-            delegate: 'GPU',
-          },
-          runningMode: 'VIDEO',
-          numPoses: 1,
-          minPoseDetectionConfidence: 0.5,
-          minPosePresenceConfidence: 0.5,
-          minTrackingConfidence: 0.5,
-        }),
-        FaceDetector.createFromOptions(vision, {
+      // Load Pose first (critical path)
+      poseLandmarkerInstance = await PoseLandmarker.createFromOptions(vision, {
+        baseOptions: {
+          modelAssetPath:
+            'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task',
+          delegate: 'GPU',
+        },
+        runningMode: 'VIDEO',
+        numPoses: 1,
+        minPoseDetectionConfidence: 0.5,
+        minPosePresenceConfidence: 0.5,
+        minTrackingConfidence: 0.5,
+      });
+      console.log('[Pose] PoseLandmarker loaded');
+
+      // Load Face as enhancement (non-blocking)
+      try {
+        faceDetectorInstance = await FaceDetector.createFromOptions(vision, {
           baseOptions: {
             modelAssetPath:
               'https://storage.googleapis.com/mediapipe-models/face_detector/blaze_face_short_range/float16/1/blaze_face_short_range.task',
@@ -43,11 +46,12 @@ async function ensureModels(): Promise<void> {
           },
           runningMode: 'VIDEO',
           minDetectionConfidence: 0.5,
-        }),
-      ]);
-
-      poseLandmarkerInstance = pose;
-      faceDetectorInstance = face;
+        });
+        console.log('[Pose] FaceDetector loaded');
+      } catch (e) {
+        console.warn('[Pose] FaceDetector unavailable (404), using fallback:', e);
+        faceDetectorInstance = null; // Graceful degradation
+      }
     })();
   }
   return initPromise!;
@@ -130,11 +134,12 @@ export function usePoseDetection({ videoRef, enabled, fps = 3 }: UsePoseDetectio
   const neckBetrayalActive = useRef(false);
   const ready = useRef(false);
 
-  // Initialize both models once
+  // Initialize PoseLandmarker once (FaceDetector is optional enhancement)
   useEffect(() => {
     if (!enabled) return;
     ensureModels().then(() => {
       ready.current = true;
+      console.log('[Pose] Ready for detection');
     });
   }, [enabled]);
 
@@ -155,24 +160,26 @@ export function usePoseDetection({ videoRef, enabled, fps = 3 }: UsePoseDetectio
     try {
       await ensureModels();
       const poseLandmarker = poseLandmarkerInstance!;
-      const faceDetector = faceDetectorInstance!;
+      const faceDetector = faceDetectorInstance; // may be null
 
       // ── Face detection ──────────────────────
       let faceConfidence = 0.5;
       let faceBboxSizeRel: number | null = null;
 
-      const faceResult = faceDetector.detectForVideo(video, performance.now());
-      if (faceResult.detections && faceResult.detections.length > 0) {
-        const det = faceResult.detections[0];
-        faceConfidence = det.categories?.[0]?.score ?? 0.5;
-        const bbox = det.boundingBox;
-        if (bbox) {
-          const frameArea = video.videoWidth * video.videoHeight;
-          const bboxArea = bbox.width * bbox.height;
-          faceBboxSizeRel = Math.sqrt(bboxArea / frameArea); // normalized 0-1
+      if (faceDetector) {
+        const faceResult = faceDetector.detectForVideo(video, performance.now());
+        if (faceResult.detections && faceResult.detections.length > 0) {
+          const det = faceResult.detections[0];
+          faceConfidence = det.categories?.[0]?.score ?? 0.5;
+          const bbox = det.boundingBox;
+          if (bbox) {
+            const frameArea = video.videoWidth * video.videoHeight;
+            const bboxArea = bbox.width * bbox.height;
+            faceBboxSizeRel = Math.sqrt(bboxArea / frameArea); // normalized 0-1
+          }
+        } else {
+          faceConfidence = 0.1; // No face detected
         }
-      } else {
-        faceConfidence = 0.1; // No face detected
       }
 
       // ── Pose detection ──────────────────────
@@ -330,6 +337,13 @@ export function usePoseDetection({ videoRef, enabled, fps = 3 }: UsePoseDetectio
       setStatus('intervention');
     }
   }, [currentLevel, status, interventionCooldown, workMode, ignoredCount, completedCount, isPageVisible, setStatus]);
+
+  // ── Console indicator for debugging ────────
+  useEffect(() => {
+    if (status === 'scanning' && ready.current) {
+      console.log('[Pose] Scan started, model ready');
+    }
+  }, [status]);
 
   // ── Page-hidden notification trigger ────────
   const lastNotifTime = useRef(0);
