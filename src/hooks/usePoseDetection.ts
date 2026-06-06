@@ -74,12 +74,34 @@ function estimateLuminance(video: HTMLVideoElement): number {
   return sum / (data.length / 4);
 }
 
+/**
+ * Estimate face size from pose landmarks (ear-to-ear distance).
+ * Works regardless of FaceDetector availability.
+ */
+function estimateFaceSizeFromPose(landmarks: any[]): number {
+  const leftEar = landmarks[7];
+  const rightEar = landmarks[8];
+  if (!leftEar || !rightEar) return 0;
+  const dx = leftEar.x - rightEar.x;
+  const dy = leftEar.y - rightEar.y;
+  return Math.sqrt(dx * dx + dy * dy);
+}
+
+// Running baseline for pose-based face size (set after first few frames)
+let poseFaceBaseline = 0;
+let poseFaceFrames = 0;
+
+function resetPoseFaceBaseline() {
+  poseFaceBaseline = 0;
+  poseFaceFrames = 0;
+}
+
 function extractFeaturesFromLandmarks(
   landmarks: any[],
   baseline: Baseline | null,
   imageWidth: number,
   imageHeight: number,
-  faceBboxSizeRel: number | null // 0-1, relative to frame size
+  faceBboxSizeRel: number | null // 0-1 from FaceDetector (optional, may be null)
 ): Features {
   const nose = landmarks[0];
   const leftShoulder = landmarks[11];
@@ -95,13 +117,19 @@ function extractFeaturesFromLandmarks(
   const shoulderDiff = Math.abs(leftShoulder.y - rightShoulder.y);
   const shoulderRisk = Math.min(100, Math.round(shoulderDiff * 300));
 
-  // Distance risk from face bbox vs baseline
-  let distanceRisk = 30; // fallback if no baseline or face bbox
-  if (baseline && faceBboxSizeRel !== null && faceBboxSizeRel > 0.01) {
-    const baselineBbox = baseline.face_bbox_size;
-    if (baselineBbox > 0.01) {
-      // Larger bbox = closer to screen = higher risk
-      const ratio = baselineBbox / Math.max(0.001, faceBboxSizeRel);
+  // Distance risk: use FaceDetector bbox if available, else pose ear-distance
+  let distanceRisk = 30;
+  let currentFaceSize = faceBboxSizeRel ?? estimateFaceSizeFromPose(landmarks);
+
+  if (currentFaceSize > 0.01) {
+    // Establish running baseline from first 5 frames
+    if (poseFaceFrames < 5) {
+      poseFaceBaseline += currentFaceSize;
+      poseFaceFrames++;
+      distanceRisk = 0;
+    } else {
+      const avgBaseline = poseFaceBaseline / 5;
+      const ratio = avgBaseline / Math.max(0.001, currentFaceSize);
       distanceRisk = Math.round(Math.max(0, Math.min(100, 100 * Math.max(0, 1 - ratio))));
     }
   }
@@ -148,6 +176,11 @@ export function usePoseDetection({ videoRef, enabled, fps = 3 }: UsePoseDetectio
     if (now - lastFrameTime.current < frameIntervalMs) return;
     lastFrameTime.current = now;
     totalFrames.current++;
+
+    // Reset pose face baseline on first frame of a new session
+    if (totalFrames.current === 1) {
+      resetPoseFaceBaseline();
+    }
 
     const video = videoRef.current;
     if (!video || video.readyState < 2) return;
