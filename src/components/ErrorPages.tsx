@@ -11,8 +11,8 @@ export function PermissionDenied() {
         <h2>{t ? '摄像头权限被拒绝' : 'Camera permission denied.'}</h2>
         <p>
           {t
-            ? 'Shrimp Mode 需要摄像头权限来在本地估算你的姿态信号。没有任何视频离开你的浏览器。'
-            : 'Shrimp Mode needs webcam access to estimate posture locally. No video leaves your browser.'}
+            ? '看不到你的工位身体，我们就没法审判你的虾化程度。视频不会上传，人脸不会保存，你可以随时停止。'
+            : 'Shrimp Mode cannot judge your posture without seeing your desk-body. No video is uploaded. No face is stored. You can stop anytime.'}
         </p>
         <div className="error-actions">
           <button className="cta-button" onClick={() => setStatus('permission_requested')}>
@@ -38,8 +38,8 @@ export function CameraUnavailable() {
         <h2>{t ? '摄像头不可用' : 'Camera unavailable.'}</h2>
         <p>
           {t
-            ? '可能另一个应用正在使用你的摄像头。请关闭 Zoom、Meet、Teams 或其他摄像头应用后重试。'
-            : 'Another app might be using your webcam. Close Zoom, Meet, Teams, or other camera apps and try again.'}
+            ? '可能有其他应用正在占用摄像头。请关闭 Zoom、Meet、Teams，或者任何假装你很忙的东西。'
+            : 'Another app may be using your webcam. Close Zoom, Meet, Teams, or anything pretending to be productive.'}
         </p>
         <div className="error-actions">
           <button className="cta-button" onClick={() => setStatus('permission_requested')}>
@@ -84,8 +84,8 @@ export function TooDark() {
         <h2>{t ? '光线太暗' : 'Too dark to detect shrimp activity.'}</h2>
         <p>
           {t
-            ? '虾在黑暗中茁壮成长。我们的模型不行。请开灯后重试。'
-            : 'The shrimp thrives in darkness. Our model does not. Please turn on a light.'}
+            ? '办公虾喜欢黑暗。我们的模型不喜欢。请开灯。'
+            : 'The shrimp thrives in darkness. Our model does not.'}
         </p>
       </div>
     </div>

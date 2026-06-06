@@ -35,11 +35,11 @@ export function Landing() {
         <div className="landing-hero">
           <div className="hero-badge">v0.1 · Local-first</div>
           <h1 className="hero-title">
-            {t ? '你在变成办公虾吗？' : 'ARE YOU BECOMING A SHRIMP?'}
+            {t ? '你正在变成办公虾吗？' : 'ARE YOU BECOMING A SHRIMP?'}
           </h1>
           <p className="hero-subtitle">
             {t
-              ? '你的工位正在慢慢把你折叠成一只海鲜。打开摄像头，获取你的虾化指数，启动解除虾化协议。'
+              ? '你的工位正在把你慢慢折叠成一只海鲜。打开摄像头。测出你的虾化分数。启动解除虾化协议。'
               : 'Your desk job is slowly folding you into seafood. Open your webcam. Get your Shrimp Score. Run the Unshrimp Protocol.'}
           </p>
 
@@ -59,18 +59,18 @@ export function Landing() {
 
           <p className="hero-footnote">
             {t
-              ? 'Omi 记住你说了什么。Shrimp Mode 记住工作怎么把你变成虾。'
-              : 'Omi remembers what you said. Shrimp Mode remembers what work did to your body.'}
+              ? '不上传视频。不保存人脸。不做老板后台。'
+              : 'No video upload. No face storage. No boss dashboard.'}
           </p>
         </div>
       </main>
 
       <footer className="landing-footer">
-        <span>For ages 13+. Not a medical device.</span>
+        <span>{t ? '13岁以上。非医疗设备。' : 'For ages 13+. Not a medical device.'}</span>
         <span>·</span>
         <span>Open source</span>
         <span>·</span>
-        <span>No tracking</span>
+        <span>{t ? '不追踪' : 'No tracking'}</span>
       </footer>
     </div>
   );

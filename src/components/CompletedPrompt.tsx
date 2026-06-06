@@ -32,7 +32,7 @@ export function CompletedPrompt({
         </p>
         <div className="completed-actions">
           <button className="cta-button" onClick={onShare}>
-            {t ? '🃏 生成虾化卡' : '🃏 Generate Card'}
+            {t ? '🃏 生成羞耻卡' : '🃏 Generate Shame Card'}
           </button>
           <button className="cta-button" onClick={onReport}>
             {t ? '📊 工位伤害报告' : '📊 Damage Report'}

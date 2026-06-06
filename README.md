@@ -1,11 +1,8 @@
 # 🦐 Shrimp Mode
 
-**Your webcam detects when your desk job turns you into a shrimp.**
+**Open your webcam. Find out how shrimp you are.**
 
-Local-first. Open-source. No video upload. No face storage. No emotion recognition. No boss dashboard.
-
-> Omi remembers what you said.  
-> Shrimp Mode remembers what work did to your body.
+A local-first, open-source webcam app that detects when your desk job turns you into a shrimp — gives you a Shrimp Score, roasts you into micro-recovery, and generates a shareable shame card.
 
 [![License](https://img.shields.io/badge/license-AGPL--3.0-blue)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)](https://www.typescriptlang.org/)
@@ -15,21 +12,25 @@ Local-first. Open-source. No video upload. No face storage. No emotion recogniti
 
 ## What is this?
 
-Shrimp Mode is an **Omi-style open-source health context agent** that uses your webcam to detect when screen work turns you into a shrimp — head forward, shoulders hunched, frozen in stillness. It gives you a **Shrimp Score**, **roasts** you into micro-recovery, and (in future versions) builds **body memories** and **autonomous recovery tasks**.
+**10 minutes. 1 webcam. Find out how shrimp you are.**
 
-### The architecture
+Shrimp Mode watches for forward head posture, desk-body stillness, screen-distance betrayal, low-light cave behavior, and recovery-free marathons. Then it turns your collapse into a Shrimp Score, savage posture roasts, and an Unshrimp Protocol before things get permanent.
 
-```
-Omi pipeline:                    Shrimp Mode pipeline:
-audio/screen                     webcam/context
-  → transcript                     → body signals
-  → memory                         → body memory
-  → summary                        → damage report
-  → action items                   → recovery tasks
-  → AI chat / apps                 → autonomous agent / plugins
-```
+This is not posture science. This is a desk demon that roasts you before your spine files a resignation letter.
 
-**Omi remembers what you said. Shrimp Mode remembers what work did to your body.**
+---
+
+## Why
+
+Gentle posture reminders don't work.
+
+"Please sit straight."
+"Please take a break."
+"Please drink water."
+
+You've seen them a hundred times. You never move.
+
+So we built something worse. A tiny webcam demon that roasts you until you stop folding into your screen.
 
 ---
 
@@ -50,12 +51,27 @@ Open `http://localhost:5173` in Chrome, Edge, or Safari.
 
 ## How it works
 
-1. **Landing Page** — "Are you becoming a shrimp?"
-2. **Permission** — Webcam access. Everything runs locally.
-3. **Calibration** — Sit like a human for 3 seconds. Baseline captured.
-4. **10-min Shrimp Scan** — MediaPipe Pose Landmarker detects your posture, computes a Shrimp Score (0-100) in real time.
-5. **Roast + Unshrimp Protocol** — Deep Shrimp? The app roasts you and suggests micro-recovery actions.
-6. **Share Card** — Generate a PNG with your stats to share.
+1. **Landing Page** — "ARE YOU BECOMING A SHRIMP?"
+2. **Permission** — Webcam access. No video upload. No face storage.
+3. **Calibrate Human Mode** — Sit like a functioning mammal for 3 seconds.
+4. **Shrimp Scan** — MediaPipe Pose + Face Detector watch your desk-body in real time.
+5. **Roast + Unshrimp Protocol** — Deep Shrimp detected? Emergency recovery. Or ignore and decay.
+6. **Daily Damage Report** — How much did work hurt you today?
+7. **Ask My Body** — Your body knows what work did to it. Ask.
+8. **Share Shame Card** — Generate a PNG. Make your friends measure their shrimp level.
+
+---
+
+## Shrimp Levels
+
+| Score | Level | Name | Tagline |
+|-------|-------|------|---------|
+| 0-20 | 0 | Human | You are currently passing as a functional mammal. |
+| 21-40 | 1 | Baby Shrimp | Your neck has begun negotiating with the monitor. |
+| 41-60 | 2 | Office Shrimp | You are not sitting. You are being slowly formatted by your desk. |
+| 61-80 | 3 | Deep Shrimp | Your upper body is applying for permanent curve status. |
+| 81-95 | 4 | Fossil Shrimp | Scientists may one day study this posture. |
+| 96-100 | 5 | Final Shrimp | This is no longer work. This is seafood archaeology. |
 
 ---
 
@@ -65,70 +81,60 @@ Open `http://localhost:5173` in Chrome, Edge, or Safari.
 |-------|-----------|
 | Framework | Vite + React + TypeScript |
 | State | Zustand |
-| Pose Detection | MediaPipe Pose Landmarker (Web, GPU) |
-| Styling | Custom CSS, dark shrimp theme |
+| Pose + Face | MediaPipe Pose Landmarker + Face Detector (Web, GPU) |
+| Storage | IndexedDB (local-only) |
 | Export | html-to-image |
 | Privacy | 100% local. No server. No upload. |
 
 ---
 
-## Shrimp Levels
-
-| Score | Level | Name | Tagline |
-|-------|-------|------|---------|
-| 0-20 | 0 | Human | You are still human. For now. |
-| 21-40 | 1 | Baby Shrimp | Your neck is starting to surrender. |
-| 41-60 | 2 | Office Shrimp | You have been marinated by desk culture. |
-| 61-80 | 3 | Deep Shrimp | Your upper body is permanently folding. |
-| 81-95 | 4 | Fossil Shrimp | You are not sitting. The desk owns you. |
-| 96-100 | 5 | Final Shrimp | The final form of knowledge work has emerged. |
-
----
-
 ## Roadmap
 
-### ✅ v0.1 — 48-hour Meme Scan (current)
+### ✅ v0.1 — Meme Scan (current)
 - [x] Landing page
 - [x] Camera permission & calibration
-- [x] MediaPipe pose detection
-- [x] Shrimp Score engine (neck forward, stillness, shoulder risk, distance, lighting)
+- [x] MediaPipe Pose + Face detection
+- [x] Shrimp Score engine
 - [x] Roast engine (6 tones × 6 levels × 2 languages)
-- [x] Unshrimp Protocol (neck reset, stand up, look away)
-- [x] Share card (PNG export)
-- [x] Privacy indicator (local-only badge)
+- [x] Unshrimp Protocol
+- [x] Share card
+- [x] Privacy indicator
 - [x] i18n (English + 简体中文)
 
-### 🔜 v0.2 — 7-day Body Memory
-- [ ] Local session store (IndexedDB)
-- [ ] Body memory generation
-- [ ] Daily Damage Report
-- [ ] Context mode (coding/writing/meeting/design/studying/gaming)
-- [ ] Basic agent policy
-- [ ] Ask My Body prototype
+### ✅ v0.2 — Body Memory
+- [x] IndexedDB local session store
+- [x] Body memory generation
+- [x] Daily Damage Report
+- [x] Context mode
+- [x] Agent policy engine
+- [x] Ask My Body prototype
+- [x] PWA + browser notifications
+- [x] Phone companion (QR pairing)
 
-### 🔮 v0.3 — 30-day Omi-style Agent
-- [ ] Recovery tasks
-- [ ] Phone companion (QR code pairing)
-- [ ] PWA notifications
+### 🔮 v0.3 — Plugins & Ecosystem
+- [ ] Recovery tasks (auto-generated)
 - [ ] Omi plugin
 - [ ] M5Stack plugin
+- [ ] Raycast / Slack / Calendar plugins
 - [ ] Community roast contribution
 
 ---
 
 ## Privacy
 
-Shrimp Mode is **local-first by design**:
+**No video upload. No face storage. No boss dashboard.**
+
+Shrimp Mode is designed to judge your posture, not your life:
 
 - ✅ No video upload — ever
 - ✅ No face storage
-- ✅ No emotion recognition
-- ✅ No biometric identification
+- ✅ No emotion detection
+- ✅ No productivity scoring
 - ✅ No employee evaluation
 - ✅ No boss dashboard
 - ✅ Open source — verify with DevTools Network tab
 
-**Shrimp Mode is not a medical device.** It does not diagnose, treat, or prevent disease. It provides playful posture and recovery nudges.
+**Shrimp Mode is not a medical device.** It does not diagnose, treat, or prevent disease. It provides playful recovery nudges.
 
 For ages 13+.
 
@@ -136,23 +142,19 @@ For ages 13+.
 
 ## Contributing
 
-We welcome contributions! Some areas that need help:
+We welcome contributions:
 
 - 🦐 Roast copywriting (add cursed roasts for engineers)
 - 🌐 Translations
 - 🔌 Plugins (Omi, M5Stack, Raycast, Slack)
 - 🔬 Model improvements
 - 🔒 Privacy review
-- ♿ Accessibility review
 
 ```bash
-# Fork and clone
 git clone https://github.com/YOUR_USERNAME/shrimp-mode.git
 cd shrimp-mode
 npm install
 npm run dev
-
-# Create a branch and PR
 git checkout -b feature/add-cursed-roasts
 ```
 
@@ -160,10 +162,10 @@ git checkout -b feature/add-cursed-roasts
 
 ## License
 
-AGPL-3.0 with anti-surveillance terms. See [LICENSE](LICENSE).
+AGPL-3.0 with anti-surveillance terms.
 
 ---
 
 <p align="center">
-  <b>Omi remembers what you said.<br>Shrimp Mode remembers what work did to your body.</b>
+  <b>Stop becoming a shrimp.</b>
 </p>

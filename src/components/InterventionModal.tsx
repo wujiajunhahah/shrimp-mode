@@ -124,7 +124,7 @@ export function InterventionModal({
             </button>
 
             <button className="intervention-ignore-btn" onClick={handleIgnore}>
-              {t ? '无视并变虾' : 'Ignore and decay'}
+              {t ? '无视，让我虾化' : 'Ignore and let me shrimp'}
             </button>
           </div>
         ) : (
